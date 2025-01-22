@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import reducer from './reducers/index.js';
+import rootReducer from './reducers/booksSlice.js';
 
 const store = configureStore({
-    reducer,
+    reducer: {
+        books: rootReducer,
+    },
     devTools: import.meta.env.MODE !== 'production',
 });
 

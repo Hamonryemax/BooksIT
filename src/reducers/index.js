@@ -1,27 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { combineReducers } from '@reduxjs/toolkit';
+import booksReducer from './booksSlice';
 
-const initialState = {
-    books: [
-        {
-            id: 1,
-            title: 'Prodiction-Ready Microservices',
-            author: 'Susan J. Fowler' },
-        {
-            id: 2,
-            title: 'Release It!',
-            author: 'Michael T. Nygard' }
-    ]
-};
-
-const booksSlice = createSlice({
-    name: 'books',
-    initialState,
-    reducers: {
-        booksLoaded: (state, action) => {
-            state.books = action.payload;
-        },
-    },
+const rootReducer = combineReducers({
+    books: booksReducer
 });
 
-export const { booksLoaded } = booksSlice.actions;
-export default booksSlice.reducer;
+export default rootReducer;
