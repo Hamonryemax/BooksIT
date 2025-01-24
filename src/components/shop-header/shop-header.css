@@ -1,0 +1,52 @@
+.shop-header {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.shop-header .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.shop-header .logo:hover {
+    color: #11caf0;
+}
+
+.shop-header .shopping-cart {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.shop-header .shopping-cart:hover {
+    color: #888;
+}
+
+.shop-header .cart-icon {
+    font-size: 1.6rem;
+    color: #11caf0;
+    margin-right: 8px;
+}
+
+.shop-header .cart-info {
+    margin-right: 10px;
+    font-weight: normal;
+}
+
+.shop-header .cart-total {
+    font-weight: bold;
+    color: #333;
+}

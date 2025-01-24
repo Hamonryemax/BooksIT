@@ -18,7 +18,7 @@ const BookList = () => {
     }, [dispatch]);
 
     return (
-        <ul>
+        <ul className="book-list">
             {books.length > 0 ? (
                 books.map((book) => (
                     <li key={book.id}>
