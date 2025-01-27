@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    books: []
+    books: [],
+    loading: true
 };
 
 const booksSlice = createSlice({
@@ -10,6 +11,7 @@ const booksSlice = createSlice({
     reducers: {
         booksLoaded: (state, action) => {
             state.books = action.payload;
+            state.loading = false;
         },
     },
 });

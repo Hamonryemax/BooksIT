@@ -9,13 +9,20 @@ import "./book-list.css";
 const BookList = () => {
     const dispatch = useDispatch();
     const books = useSelector((state) => state.books?.books || []);
+    const loading = useSelector((state) => state.books?.loading);
 
     useEffect(() => {
         const bookstoreService = new BookstoreService();
-        const booksData = bookstoreService.getBooks();
-
-        dispatch(booksLoaded(booksData));
+        bookstoreService.getBooks()
+            .then((data) => dispatch(booksLoaded(data)))
+            .catch((error) => console.error("Failed to fetch books:", error));
     }, [dispatch]);
+
+    if (loading) {
+        return(
+            <div>...loading</div>
+        )
+    }
 
     return (
         <ul className="book-list">
@@ -26,7 +33,7 @@ const BookList = () => {
                     </li>
                 ))
             ) : (
-                <p>No books available</p>
+                <div>No books available</div>
             )}
         </ul>
     );
