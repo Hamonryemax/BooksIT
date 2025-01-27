@@ -3,7 +3,22 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     books: [],
     loading: true,
-    error: null
+    error: null,
+    cartItems:  [
+        {
+            id: 1,
+            title: 'Book 1',
+            count: 3,
+            total: 150
+        },
+        {
+            id: 2,
+            title: 'Book 2',
+            count: 2,
+            total: 80
+        },
+    ],
+    orderTotal: 230
 };
 
 const booksSlice = createSlice({
