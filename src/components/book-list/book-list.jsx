@@ -1,32 +1,19 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { booksLoaded } from "../../reducers/booksSlice.js";
+import { booksLoaded, booksRequested, booksError } from "../../reducers/books-slice.js";
 import BookListItem from "../book-list-item/book-list-item.jsx";
+import Spinner from "../spinner/spinner.jsx";
+import ErrorIndicator from "../error-indicator/error-indicator.jsx";
 import BookstoreService from "../../services/bookstore-service";
+import PropTypes from 'prop-types';
 
 import "./book-list.css";
 
-const BookList = () => {
-    const dispatch = useDispatch();
-    const books = useSelector((state) => state.books?.books || []);
-    const loading = useSelector((state) => state.books?.loading);
 
-    useEffect(() => {
-        const bookstoreService = new BookstoreService();
-        bookstoreService.getBooks()
-            .then((data) => dispatch(booksLoaded(data)))
-            .catch((error) => console.error("Failed to fetch books:", error));
-    }, [dispatch]);
-
-    if (loading) {
-        return(
-            <div>...loading</div>
-        )
-    }
-
+const BookList = ({ books }) => {
     return (
         <ul className="book-list">
-            {books.length > 0 ? (
+            {books.length ? (
                 books.map((book) => (
                     <li key={book.id}>
                         <BookListItem book={book} />
@@ -39,4 +26,41 @@ const BookList = () => {
     );
 };
 
-export default React.memo(BookList);
+BookList.propTypes = {
+    books: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+            author: PropTypes.string.isRequired
+        })
+    ).isRequired
+};
+
+const bookstoreService = new BookstoreService();
+
+const useBooks = () => {
+    const dispatch = useDispatch();
+    const { loading, error, books } = useSelector((state) => state.books);
+
+    useEffect(() => {
+        dispatch(booksRequested());
+
+        bookstoreService.getBooks()
+            .then((data) => dispatch(booksLoaded(data)))
+            .catch((error) => dispatch(booksError(error.message || 'Unknown error occurred')));
+    }, [dispatch]);
+
+    return { loading, error, books };
+};
+
+const BookListContainer = () => {
+    const { loading, error, books } = useBooks();
+
+    if (loading) return <Spinner />;
+    if (error) return <ErrorIndicator message={error} />;
+    return <BookList books={books} />;
+};
+
+
+
+export default React.memo(BookListContainer);
