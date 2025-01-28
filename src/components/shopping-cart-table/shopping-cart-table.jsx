@@ -2,24 +2,24 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
+import { bookIncreased, bookDecreased, bookDeleted } from '../../reducers/books-slice';
 
 import './shopping-cart-table.css';
 
 const ShoppingCartTable = () => {
     const dispatch = useDispatch();
-
     const { cartItems, orderTotal } = useSelector((state) => state.books);
 
     const handleIncrease = (id) => {
-        console.log(`Increase item with id: ${id}`);
+        dispatch(bookIncreased(id));
     };
 
     const handleDecrease = (id) => {
-        console.log(`Decrease item with id: ${id}`);
+        dispatch(bookDecreased(id));
     };
 
     const handleDelete = (id) => {
-        console.log(`Delete item with id: ${id}`);
+        dispatch(bookDeleted(id));
     };
 
     return (
@@ -44,7 +44,7 @@ const ShoppingCartTable = () => {
                             <td>{idx + 1}</td>
                             <td>{item.title}</td>
                             <td>{item.count}</td>
-                            <td>${item.total}</td>
+                            <td>${item.total.toFixed(2)}</td>
                             <td>
                                 <button
                                     onClick={() => handleIncrease(item.id)}
@@ -70,7 +70,7 @@ const ShoppingCartTable = () => {
                     </tbody>
                 </table>
             )}
-            <div className="total">Total: ${orderTotal}</div>
+            <div className="total">Total: ${orderTotal.toFixed(2)}</div>
         </div>
     );
 };

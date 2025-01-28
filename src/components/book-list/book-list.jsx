@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { booksLoaded, booksRequested, booksError } from "../../reducers/books-slice.js";
+import { booksLoaded, booksRequested, booksError, bookAddedToCart } from "../../reducers/books-slice.js";
 import BookListItem from "../book-list-item/book-list-item.jsx";
 import Spinner from "../spinner/spinner.jsx";
 import ErrorIndicator from "../error-indicator/error-indicator.jsx";
@@ -10,13 +10,16 @@ import PropTypes from 'prop-types';
 import "./book-list.css";
 
 
-const BookList = ({ books }) => {
+const BookList = ({ books, onAddedToCart }) => {
     return (
         <ul className="book-list">
             {books.length ? (
                 books.map((book) => (
                     <li key={book.id}>
-                        <BookListItem book={book} />
+                        <BookListItem
+                            book={book}
+                            onAddedToCart={() => onAddedToCart(book)}
+                        />
                     </li>
                 ))
             ) : (
@@ -54,12 +57,18 @@ const useBooks = () => {
 };
 
 const BookListContainer = () => {
+    const dispatch = useDispatch(); // Добавляем диспатч
     const { loading, error, books } = useBooks();
+
+    const handleAddToCart = (book) => {
+        dispatch(bookAddedToCart(book));
+    };
 
     if (loading) return <Spinner />;
     if (error) return <ErrorIndicator message={error} />;
-    return <BookList books={books} />;
+    return <BookList books={books} onAddedToCart={handleAddToCart} />;
 };
+
 
 
 
