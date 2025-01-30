@@ -57,7 +57,7 @@ const useBooks = () => {
 };
 
 const BookListContainer = () => {
-    const dispatch = useDispatch(); // Добавляем диспатч
+    const dispatch = useDispatch();
     const { loading, error, books } = useBooks();
 
     const handleAddToCart = (book) => {

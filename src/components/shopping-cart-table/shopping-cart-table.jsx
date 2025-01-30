@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
@@ -31,8 +30,8 @@ const ShoppingCartTable = () => {
                 <table className="table">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Item</th>
+                        <th></th>
+                        <th>Books</th>
                         <th>Count</th>
                         <th>Price</th>
                         <th>Action</th>
