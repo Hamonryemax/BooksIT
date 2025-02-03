@@ -1,6 +1,11 @@
 .book-list-item {
     display: flex;
     margin: 15px 0;
+    padding: 5px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    width: 350px;
+    height: 200px;
 }
 
 .book-list-item .book-cover {
@@ -10,7 +15,8 @@
 }
 
 .book-list-item .book-cover img {
-    max-width: 100%;
+    width: 145px;
+    height: 185px;
 }
 
 .book-list-item .book-details {
@@ -21,10 +27,21 @@
     align-items: flex-start;
 }
 
-.book-list-item .book-details bool-title {
+.book-title {
     font-size: 1.2rem;
+    color: inherit;
+    text-decoration: none;
 }
 
-.book-list-item .book-details book-price {
-    font-size: 1.8rem;
+.book-title:hover {
+    color: #0dcaf0;
+    transition: color 0.3s ease;
+}
+
+.book-author {
+    font-size: 1rem;
+}
+
+.book-price {
+    font-size: 1rem;
 }

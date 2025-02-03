@@ -12,20 +12,21 @@ import "./book-list.css";
 
 const BookList = ({ books, onAddedToCart }) => {
     return (
-        <ul className="book-list">
-            {books.length ? (
-                books.map((book) => (
-                    <li key={book.id}>
-                        <BookListItem
-                            book={book}
-                            onAddedToCart={() => onAddedToCart(book)}
-                        />
-                    </li>
-                ))
-            ) : (
-                <div>No books available</div>
-            )}
-        </ul>
+            <ul className="book-list">
+                {books.length ? (
+                    books.map((book) => (
+                        <li className="book-item"
+                            key={book.id}>
+                            <BookListItem
+                                book={book}
+                                onAddedToCart={() => onAddedToCart(book)}
+                            />
+                        </li>
+                    ))
+                ) : (
+                    <div>No books available</div>
+                )}
+            </ul>
     );
 };
 
