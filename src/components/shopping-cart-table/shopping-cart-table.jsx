@@ -43,7 +43,7 @@ const ShoppingCartTable = () => {
                             <td>{idx + 1}</td>
                             <td>{item.title}</td>
                             <td>{item.count}</td>
-                            <td>${item.total.toFixed(2)}</td>
+                            <td>{item.total}$</td>
                             <td>
                                 <button
                                     onClick={() => handleIncrease(item.id)}
@@ -69,7 +69,7 @@ const ShoppingCartTable = () => {
                     </tbody>
                 </table>
             )}
-            <div className="total">Total: ${orderTotal.toFixed(2)}</div>
+            <div className="total">Total: {orderTotal}$</div>
         </div>
     );
 };

@@ -12,69 +12,80 @@ const booksSlice = createSlice({
     name: 'books',
     initialState,
     reducers: {
-        booksRequested: (state) => {
+        bookAddedToCart: (state, action) => {
+            const bookId = action.payload.id;
+            const bookPrice = parseFloat(action.payload.price.replace("$", "")) || 0;
+            const existingBook = state.cartItems.find(item => item.id === bookId);
+
+            if (existingBook) {
+                existingBook.count++;
+                existingBook.total = parseFloat((existingBook.total + bookPrice).toFixed(2));
+            } else {
+                state.cartItems.push({
+                    ...action.payload,
+                    count: 1,
+                    total: parseFloat(bookPrice.toFixed(2))
+                });
+            }
+
+            state.orderTotal = parseFloat(
+                state.cartItems.reduce((sum, item) => sum + item.total, 0).toFixed(2)
+            );
+        },
+        bookIncreased: (state, action) => {
+            const item = state.cartItems.find(book => book.id === action.payload);
+            if (item) {
+                const price = parseFloat(item.price.replace("$", "")) || 0;
+                item.count++;
+                item.total = parseFloat((item.total + price).toFixed(2));
+                state.orderTotal = parseFloat((state.orderTotal + price).toFixed(2));
+            }
+        },
+        bookDecreased: (state, action) => {
+            const item = state.cartItems.find(book => book.id === action.payload);
+            if (item && item.count > 0) {
+                const price = parseFloat(item.price.replace("$", "")) || 0;
+                item.count--;
+                item.total = parseFloat((item.total - price).toFixed(2));
+                state.orderTotal = parseFloat((state.orderTotal - price).toFixed(2));
+
+                if (item.count === 0) {
+                    const itemIndex = state.cartItems.findIndex(book => book.id === action.payload);
+                    state.orderTotal = parseFloat((state.orderTotal - state.cartItems[itemIndex].total).toFixed(2));
+                    state.cartItems.splice(itemIndex, 1);
+                }
+            }
+        },
+        bookDeleted: (state, action) => {
+            const itemIndex = state.cartItems.findIndex(book => book.id === action.payload);
+            if (itemIndex !== -1) {
+                state.orderTotal = parseFloat((state.orderTotal - state.cartItems[itemIndex].total).toFixed(2));
+                state.cartItems.splice(itemIndex, 1);
+            }
+        },
+        fetchBooksStart(state) {
             state.loading = true;
+            state.error = null;
         },
-        booksLoaded: (state, action) => {
-            state.books = action.payload;
+        fetchBooksSuccess(state, action) {
             state.loading = false;
+            state.books = action.payload;
         },
-        booksError: (state, action) => {
-            state.books = [];
+        fetchBooksFailure(state, action) {
             state.loading = false;
             state.error = action.payload;
         },
-        bookAddedToCart: (state, action) => {
-            const bookId = action.payload.id;
-            const book = state.books.find((book) => book.id === bookId);
-            if (!book) return;
-
-            const existingBook = state.cartItems.find((item) => item.id === bookId);
-            if (existingBook) {
-                existingBook.count += 1;
-                existingBook.total += book.price;
-            } else {
-                state.cartItems.push({
-                    id: book.id,
-                    title: book.title,
-                    count: 1,
-                    total: book.price
-                });
-            }
-            state.orderTotal = state.cartItems.reduce((sum, item) => sum + item.total, 0);
-        },
-        bookIncreased: (state, action) => {
-            const item = state.cartItems.find((item) => item.id === action.payload);
-            if (item) {
-                item.count += 1;
-                item.total += item.total / (item.count - 1);
-            }
-            state.orderTotal = state.cartItems.reduce((sum, item) => sum + item.total, 0);
-        },
-        bookDecreased: (state, action) => {
-            const item = state.cartItems.find((item) => item.id === action.payload);
-            if (item && item.count > 1) {
-                item.count -= 1;
-                item.total -= item.total / (item.count + 1);
-            }
-            state.orderTotal = state.cartItems.reduce((sum, item) => sum + item.total, 0);
-        },
-        bookDeleted: (state, action) => {
-            state.cartItems = state.cartItems.filter((item) => item.id !== action.payload);
-            state.orderTotal = state.cartItems.reduce((sum, item) => sum + item.total, 0);
-        }
     },
 });
 
-
 export const {
-    booksRequested,
-    booksLoaded,
-    booksError,
     bookAddedToCart,
     bookIncreased,
     bookDecreased,
-    bookDeleted
+    bookDeleted,
+    fetchBooksStart,
+    fetchBooksSuccess,
+    fetchBooksFailure
 } = booksSlice.actions;
 
 export default booksSlice.reducer;
