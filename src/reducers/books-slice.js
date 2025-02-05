@@ -43,16 +43,14 @@ const booksSlice = createSlice({
         },
         bookDecreased: (state, action) => {
             const item = state.cartItems.find(book => book.id === action.payload);
-            if (item && item.count > 0) {
+            if (item) {
                 const price = parseFloat(item.price.replace("$", "")) || 0;
                 item.count--;
                 item.total = parseFloat((item.total - price).toFixed(2));
                 state.orderTotal = parseFloat((state.orderTotal - price).toFixed(2));
 
                 if (item.count === 0) {
-                    const itemIndex = state.cartItems.findIndex(book => book.id === action.payload);
-                    state.orderTotal = parseFloat((state.orderTotal - state.cartItems[itemIndex].total).toFixed(2));
-                    state.cartItems.splice(itemIndex, 1);
+                    state.cartItems = state.cartItems.filter(book => book.id !== action.payload);
                 }
             }
         },
