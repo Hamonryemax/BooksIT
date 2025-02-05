@@ -16,7 +16,7 @@ const BookListItem = ({ book, onAddedToCart }) => {
                     <div className="book-price">{price}</div>
                     <button
                         onClick={() => onAddedToCart(id)}
-                        className="btn btn-info add-to-cart">
+                        className="btn btn-info add-to-cart button-add-to-cart">
                         Add to cart
                     </button>
                 </div>
@@ -27,7 +27,7 @@ const BookListItem = ({ book, onAddedToCart }) => {
 
 BookListItem.propTypes = {
     book: PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         price: PropTypes.string.isRequired,
         image: PropTypes.string

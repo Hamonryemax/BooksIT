@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { HomePage, CartPage } from "../pages";
-import ShopHeader from "../shop-header/shop-header.jsx"
+import ShopHeader from "../shop-header/shop-header.jsx";
 
 import './app.css';
 

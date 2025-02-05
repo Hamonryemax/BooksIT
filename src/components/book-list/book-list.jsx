@@ -6,6 +6,7 @@ import BookListItem from "../book-list-item/book-list-item.jsx";
 import Spinner from "../spinner/spinner.jsx";
 import ErrorIndicator from "../error-indicator/error-indicator.jsx";
 import PropTypes from "prop-types";
+import Pagination from "../pagination/pagination.jsx";
 
 import "./book-list.css";
 
@@ -34,34 +35,47 @@ const BookList = ({ books, onAddedToCart }) => {
     );
 };
 
-BookListItem.propTypes = {
-    book: PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-        title: PropTypes.string.isRequired,
-        author: PropTypes.string.isRequired,
-        isbn13: PropTypes.string.isRequired,
-        price: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-    }).isRequired,
+BookList.propTypes = {
+    books: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            author: PropTypes.string.isRequired,
+            isbn13: PropTypes.string.isRequired,
+            price: PropTypes.string,
+            image: PropTypes.string,
+        })
+    ).isRequired,
+    onAddedToCart: PropTypes.func.isRequired,
 };
-
 
 
 const BookListContainer = () => {
     const dispatch = useDispatch();
-    const { loading, error, books } = useSelector((state) => state.books);
+    const { loading, error, books, currentPage } = useSelector((state) => state.books);
 
     useEffect(() => {
-        dispatch(fetchBooks("javascript"));
-    }, [dispatch]);
+        dispatch(fetchBooks("javascript", currentPage));
+    }, [dispatch, currentPage]);
 
     const handleAddToCart = (book) => {
         dispatch(bookAddedToCart(book));
     };
 
-    if (loading) return <Spinner />;
+    if (loading) return (
+        <>
+            <Spinner />
+            <Pagination query="javascript"/>
+        </>
+    )
     if (error) return <ErrorIndicator message={error} />;
-    return <BookList books={books} onAddedToCart={handleAddToCart} />;
+
+    return (
+        <>
+            <BookList books={books} onAddedToCart={handleAddToCart} />
+            <Pagination query="javascript"/>
+        </>
+    )
 };
 
 export default React.memo(BookListContainer);

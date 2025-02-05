@@ -5,7 +5,9 @@ const initialState = {
     loading: true,
     error: null,
     cartItems: [],
-    orderTotal: 0
+    orderTotal: 0,
+    currentPage: 1,
+    totalBooks: 0
 };
 
 const booksSlice = createSlice({
@@ -67,12 +69,16 @@ const booksSlice = createSlice({
         },
         fetchBooksSuccess(state, action) {
             state.loading = false;
-            state.books = action.payload;
+            state.books = action.payload.books.slice(0, 9);
+            state.totalBooks = action.payload.totalBooks;
         },
         fetchBooksFailure(state, action) {
             state.loading = false;
             state.error = action.payload;
         },
+        setCurrentPage(state, action) {
+            state.currentPage = action.payload;
+        }
     },
 });
 
@@ -83,7 +89,8 @@ export const {
     bookDeleted,
     fetchBooksStart,
     fetchBooksSuccess,
-    fetchBooksFailure
+    fetchBooksFailure,
+    setCurrentPage
 } = booksSlice.actions;
 
 export default booksSlice.reducer;

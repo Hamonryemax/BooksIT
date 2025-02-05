@@ -42,3 +42,11 @@
 .book-price {
     font-size: 0.8rem;
 }
+
+.button-add-to-cart:hover {
+    opacity: 0.9;
+}
+
+.button-add-to-cart:active {
+    background: radial-gradient(#fff, #0dcaf0);
+}
