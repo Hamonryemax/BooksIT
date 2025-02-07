@@ -18,7 +18,7 @@
 }
 
 .shop-header .logo:hover {
-    color: #11caf0;
+    color: #82e2ff;
 }
 
 .shop-header .shopping-cart {
@@ -37,7 +37,7 @@
 
 .shop-header .cart-icon {
     font-size: 1.6rem;
-    color: #11caf0;
+    color: #82e2ff;
     margin-right: 8px;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .search-input:focus {
-    border-color: #11caf0;
+    border-color: #82e2ff;
 }
 
 .shop-header .cart-info {

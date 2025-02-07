@@ -6,27 +6,44 @@ import './pagination.css';
 
 const Pagination = ({ query }) => {
     const dispatch = useDispatch();
-    const { totalBooks } = useSelector((state) => state.books);
+    const { totalBooks, currentPage } = useSelector((state) => state.books);
 
-    const booksPerPage = 9;
-    const totalPage = Math.ceil(totalBooks / booksPerPage);
+    const booksPerPage = 10;
+    const totalPages = Math.ceil(totalBooks / booksPerPage);
+    const maxVisiblePages = 10;
 
-    const handlePageChange= (page) => {
+    const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+    const handlePageChange = (page) => {
         dispatch(setCurrentPage(page));
         dispatch(fetchBooks(query, page));
     }
 
     return (
-        <div className="pagination">
-            {Array.from({ length: totalPage }).map((_, i) => (
+            <div className="pagination">
                 <button
                     className="btn"
-                    key={i}
-                    onClick={() => handlePageChange(i + 1)}>
-                    {i + 1}
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}>
+                    {`<`}
                 </button>
-            ))}
-        </div>
+                {Array.from({length: endPage - startPage + 1}).map((_, i) => (
+                    <button
+                        className={`btn ${currentPage === startPage + i ? 'active' : ''}`}
+                        key={i}
+                        onClick={() => handlePageChange(startPage + i)}
+                        disabled={startPage + i === currentPage}>
+                        {startPage + i}
+                    </button>
+                ))}
+                <button
+                    className="btn"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}>
+                    {`>`}
+                </button>
+            </div>
     )
 };
 

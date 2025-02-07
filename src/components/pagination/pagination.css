@@ -1,9 +1,12 @@
 .pagination {
     display: flex;
     gap: 4px;
+    justify-content: center;
+    align-items: center;
 }
 
-.btn {
-    cursor: pointer;
+.btn:disabled, .btn:hover:disabled {
+    background-color: #00d2ff;
+    color: white;
+    cursor: none;
 }
-

@@ -35,7 +35,7 @@
 }
 
 .book-title:hover {
-    color: #0dcaf0;
+    color: #82e2ff;
     transition: color 0.3s ease;
 }
 
@@ -43,10 +43,18 @@
     font-size: 0.8rem;
 }
 
+.button-add-to-cart {
+    color: #fff;
+    background-color: #82e2ff;
+    border: none;
+}
+
 .button-add-to-cart:hover {
+    color: #fff;
     opacity: 0.9;
 }
 
 .button-add-to-cart:active {
-    background: radial-gradient(#fff, #0dcaf0);
+    color: #fff;
+    background: radial-gradient(#fff, #82e2ff);
 }
