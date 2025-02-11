@@ -16,7 +16,7 @@ const BookListItem = ({ book, onAddedToCart }) => {
                     <div className="book-price">{price}</div>
                     <button
                         onClick={() => onAddedToCart(id)}
-                        className="btn btn-info add-to-cart button-add-to-cart">
+                        className="btn-info add-to-cart button-add-to-cart">
                         Add to cart
                     </button>
                 </div>

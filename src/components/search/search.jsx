@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchBooks } from "../../actions/books-actions.js";
-import "./search.css";
+import { fetchBooks } from "/src/actions/books-actions.js";
+import { setCurrentPage } from "../../reducers/books-slice.js";
+import './search.css';
 
 const Search = () => {
-    const [searchQuery, setSearchQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState('');
     const dispatch = useDispatch();
 
     const handleSearchChange = (e) => {
@@ -13,9 +14,8 @@ const Search = () => {
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
-        if (searchQuery.trim()) {
-            dispatch(fetchBooks(searchQuery)); // Запрос книг по поисковому запросу
-        }
+        dispatch(setCurrentPage(1));
+        dispatch(fetchBooks(searchQuery, 1));
     };
 
     return (
@@ -27,8 +27,9 @@ const Search = () => {
                 placeholder="Search for books..."
                 className="search-input"
             />
+            <button type="submit" className="search-btn">Go</button>
         </form>
     );
-};
+}
 
 export default Search;

@@ -1,7 +1,8 @@
+import ShoppingCartTable from "../shopping-cart-table/shopping-cart-table.jsx";
 
 const CartPage = () => {
     return (
-        <div>Cart page</div>
+        <ShoppingCartTable />
     )
 }
 

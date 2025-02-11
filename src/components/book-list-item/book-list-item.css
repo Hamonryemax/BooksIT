@@ -47,14 +47,18 @@
     color: #fff;
     background-color: #82e2ff;
     border: none;
+    border-radius: 5px;
+    height: 40px;
+    width: 120px;
 }
 
 .button-add-to-cart:hover {
-    color: #fff;
+    color: #ffffff;
     opacity: 0.9;
+    background-color: #5cc9ff;
 }
 
 .button-add-to-cart:active {
-    color: #fff;
-    background: radial-gradient(#fff, #82e2ff);
+    color: #ffffff;
+    background: radial-gradient(#dddddd, #82e2ff);
 }

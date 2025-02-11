@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
@@ -7,7 +8,9 @@ import Search from '/src/components/search/search.jsx'
 
 import './shop-header.css';
 
-const ShopHeader = ({ numItems = 0, total = 0 }) => {
+const ShopHeader = () => {
+    const { orderTotal, cartItems } = useSelector((state) => state.books);
+    const totalItemsCount = cartItems.reduce((acc, item) => acc + item.count, 0);
 
     return (
         <header className="shop-header">
@@ -15,8 +18,8 @@ const ShopHeader = ({ numItems = 0, total = 0 }) => {
             <Search />
             <Link to="/cart" className="shopping-cart">
                 <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
-                <span className="cart-info">{numItems} items</span>
-                <span className="cart-total">${total}</span>
+                <span className="cart-info">{totalItemsCount} Books</span>
+                <span className="cart-total">{orderTotal}$</span>
             </Link>
         </header>
     );

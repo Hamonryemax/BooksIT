@@ -18,7 +18,7 @@
 }
 
 .shop-header .logo:hover {
-    color: #82e2ff;
+    color: #5cc9ff;
 }
 
 .shop-header .shopping-cart {
@@ -35,7 +35,7 @@
     color: #888;
 }
 
-.shop-header .cart-icon {
+.cart-icon {
     font-size: 1.6rem;
     color: #82e2ff;
     margin-right: 8px;
@@ -49,4 +49,9 @@
 .shop-header .cart-total {
     font-weight: bold;
     color: #333;
+}
+
+.cart-icon:hover {
+    color: #5cc9ff;
+    opacity: 0.9;
 }

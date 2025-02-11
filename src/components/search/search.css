@@ -2,12 +2,13 @@
     flex: 1;
     display: flex;
     justify-content: center;
+    gap: 8px;
 }
 
 .search-input {
     width: 60%;
     padding: 8px;
-    font-size: 16px;
+    font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
@@ -15,4 +16,25 @@
 
 .search-input:focus {
     border-color: #82e2ff;
+    box-shadow: 0 0 4px #82e2ff;
+}
+
+.search-btn {
+    background-color: #82e2ff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #5cc9ff;
+}
+
+.search-btn:active {
+    color: #ffffff;
+    background: radial-gradient(#dddddd, #82e2ff);
 }

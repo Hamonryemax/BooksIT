@@ -52,7 +52,7 @@ BookList.propTypes = {
 
 const BookListContainer = () => {
     const dispatch = useDispatch();
-    const { loading, error, books, currentPage } = useSelector((state) => state.books);
+    const { loading, books, currentPage } = useSelector((state) => state.books);
 
     useEffect(() => {
         dispatch(fetchBooks("javascript", currentPage));
@@ -65,17 +65,22 @@ const BookListContainer = () => {
     if (loading) return (
         <>
             <Spinner />
-            <Pagination query="javascript"/>
+            <Pagination query="javascript" />
         </>
     )
-    if (error) return <ErrorIndicator message={error} />;
 
     return (
-        <>
-            <BookList books={books} onAddedToCart={handleAddToCart} />
-            <Pagination query="javascript"/>
-        </>
-    )
+        <div>
+            {books.length > 0 ? (
+                <>
+                    <BookList books={books} onAddedToCart={handleAddToCart} />
+                    <Pagination query="javascript" />
+                </>
+            ) : (
+                <ErrorIndicator />
+            )}
+        </div>
+    );
 };
 
 export default React.memo(BookListContainer);

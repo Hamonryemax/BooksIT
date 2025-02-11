@@ -7,7 +7,7 @@ import './shopping-cart-table.css';
 
 const ShoppingCartTable = () => {
     const dispatch = useDispatch();
-    const { cartItems, orderTotal } = useSelector((state) => state.books);
+    const { cartItems } = useSelector((state) => state.books);
 
     const handleIncrease = (id) => {
         dispatch(bookIncreased(id));
@@ -69,7 +69,6 @@ const ShoppingCartTable = () => {
                     </tbody>
                 </table>
             )}
-            <div className="total">Total: {orderTotal}$</div>
         </div>
     );
 };
