@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchBooks } from "/src/actions/books-actions.js";
-import { setCurrentPage } from "../../reducers/books-slice.js";
+import { setCurrentPage, setCurrentQuery } from "../../reducers/books-slice.js";
 import './search.css';
 
 const Search = () => {
@@ -14,6 +14,7 @@ const Search = () => {
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
+        dispatch(setCurrentQuery(searchQuery));
         dispatch(setCurrentPage(1));
         dispatch(fetchBooks(searchQuery, 1));
     };

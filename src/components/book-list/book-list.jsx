@@ -52,11 +52,11 @@ BookList.propTypes = {
 
 const BookListContainer = () => {
     const dispatch = useDispatch();
-    const { loading, books, currentPage } = useSelector((state) => state.books);
+    const { loading, books, currentPage, currentQuery } = useSelector((state) => state.books);
 
     useEffect(() => {
-        dispatch(fetchBooks("javascript", currentPage));
-    }, [dispatch, currentPage]);
+        dispatch(fetchBooks(currentQuery, currentPage));
+    }, [dispatch, currentPage, currentQuery]);
 
     const handleAddToCart = (book) => {
         dispatch(bookAddedToCart(book));
@@ -65,7 +65,7 @@ const BookListContainer = () => {
     if (loading) return (
         <>
             <Spinner />
-            <Pagination query="javascript" />
+            <Pagination />
         </>
     )
 
@@ -74,7 +74,7 @@ const BookListContainer = () => {
             {books.length > 0 ? (
                 <>
                     <BookList books={books} onAddedToCart={handleAddToCart} />
-                    <Pagination query="javascript" />
+                    <Pagination />
                 </>
             ) : (
                 <ErrorIndicator />

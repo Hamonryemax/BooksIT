@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBooks } from '/src/actions/books-actions.js'
 import { setCurrentPage } from '../../reducers/books-slice.js'
 
 import './pagination.css';
 
-const Pagination = ({ query }) => {
+const Pagination = () => {
     const dispatch = useDispatch();
     const { totalBooks, currentPage } = useSelector((state) => state.books);
 
@@ -17,7 +16,6 @@ const Pagination = ({ query }) => {
 
     const handlePageChange = (page) => {
         dispatch(setCurrentPage(page));
-        dispatch(fetchBooks(query, page));
     }
 
     return (
@@ -32,14 +30,18 @@ const Pagination = ({ query }) => {
                     <button
                         className={`btn ${currentPage === startPage + i ? 'active' : ''}`}
                         key={i}
-                        onClick={() => handlePageChange(startPage + i)}
+                        onClick={() => {
+                            handlePageChange(startPage + i)
+                        }}
                         disabled={startPage + i === currentPage}>
                         {startPage + i}
                     </button>
                 ))}
                 <button
                     className="btn"
-                    onClick={() => handlePageChange(currentPage + 1)}
+                    onClick={() => {
+                        handlePageChange(currentPage + 1)
+                    }}
                     disabled={currentPage === totalPages}>
                     {`>`}
                 </button>

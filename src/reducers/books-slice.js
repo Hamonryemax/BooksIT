@@ -7,7 +7,8 @@ const initialState = {
     cartItems: [],
     orderTotal: 0,
     currentPage: 1,
-    totalBooks: 0
+    totalBooks: 0,
+    currentQuery: 'javaScript'
 };
 
 const booksSlice = createSlice({
@@ -78,6 +79,9 @@ const booksSlice = createSlice({
         },
         setCurrentPage(state, action) {
             state.currentPage = action.payload;
+        },
+        setCurrentQuery(state, action) {
+            state.currentQuery = action.payload;
         }
     },
 });
@@ -90,7 +94,8 @@ export const {
     fetchBooksStart,
     fetchBooksSuccess,
     fetchBooksFailure,
-    setCurrentPage
+    setCurrentPage,
+    setCurrentQuery
 } = booksSlice.actions;
 
 export default booksSlice.reducer;
