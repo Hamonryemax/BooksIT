@@ -8,7 +8,9 @@ const BookListItem = ({ book, onAddedToCart }) => {
     return (
         <div className="book-list-item">
             <div className="book-cover">
-                <img src={image} alt="cover" />
+                <img src={image}
+                     alt="cover"
+                     className="book-img"/>
             </div>
             <div className="book-details">
                 <a href="#" className="book-title">{title}</a>

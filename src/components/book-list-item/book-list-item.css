@@ -6,6 +6,7 @@
     border-radius: 3px;
     width: 350px;
     height: 200px;
+    overflow: hidden;
 }
 
 .book-cover {
@@ -14,9 +15,14 @@
     margin-right: 30px;
 }
 
-.book-cover img {
+.book-img {
     width: 145px;
     height: 185px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.book-img:hover {
+    transform: scale(1.1);
 }
 
 .book-details {
@@ -44,6 +50,7 @@
 }
 
 .button-add-to-cart {
+    font-size: 1rem;
     color: #fff;
     background-color: #82e2ff;
     border: none;
@@ -56,6 +63,7 @@
     color: #ffffff;
     opacity: 0.9;
     background-color: #5cc9ff;
+    transition: background-color 0.3s ease;
 }
 
 .button-add-to-cart:active {
