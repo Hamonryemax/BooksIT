@@ -1,8 +1,15 @@
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
 body {
-    background: linear-gradient(to bottom right, #ffffff, #dfeafd);
+    background: linear-gradient(#ffffff, #dfeafd);
 }
 
 .container {
     max-width: 1200px;
-    height: 935px;
+    height: auto;
 }

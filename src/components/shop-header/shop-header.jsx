@@ -16,11 +16,13 @@ const ShopHeader = () => {
         <header className="shop-header">
             <Link to="/" className="logo">BooksIT</Link>
             <Search />
-            <Link to="/cart" className="shopping-cart">
-                <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
-                <span className="cart-info">{totalItemsCount} Books</span>
-                <span className="cart-total">{orderTotal}$</span>
-            </Link>
+            <div className="container-for-cart">
+                <Link to="/cart" className="shopping-cart">
+                    <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
+                    <span className="cart-info">{totalItemsCount} Books</span>
+                    <span className="cart-total">{orderTotal}$</span>
+                </Link>
+            </div>
         </header>
     );
 };

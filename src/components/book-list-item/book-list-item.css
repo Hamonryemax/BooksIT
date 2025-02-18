@@ -9,6 +9,10 @@
     overflow: hidden;
 }
 
+.book-list-item:hover {
+    box-shadow: 0 0 10px #dddddd;
+}
+
 .book-cover {
     flex-shrink: 0;
     width: 140px;

@@ -12,11 +12,13 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
+    opacity: 0.7;
 }
 
 .search-input:focus {
     border-color: #82e2ff;
     box-shadow: 0 0 4px #82e2ff;
+    opacity: 1;
 }
 
 .search-btn {
