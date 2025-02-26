@@ -7,6 +7,7 @@
 
 .btn:disabled, .btn:hover:disabled {
     background-color: #00d2ff;
-    color: white;
+    color: #fff;
     cursor: none;
+    border: none;
 }

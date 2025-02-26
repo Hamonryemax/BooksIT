@@ -5,9 +5,8 @@ import { fetchBooks } from "../../actions/books-actions.js";
 import BookListItem from "../book-list-item/book-list-item.jsx";
 import Spinner from "../spinner/spinner.jsx";
 import ErrorIndicator from "../error-indicator/error-indicator.jsx";
-import PropTypes from "prop-types";
 import Pagination from "../pagination/pagination.jsx";
-
+import BookModal from "../book-modal/book-modal.jsx";
 import "./book-list.css";
 
 const BookList = ({ books, onAddedToCart }) => {
@@ -15,18 +14,12 @@ const BookList = ({ books, onAddedToCart }) => {
         <ul className="book-list">
             {books.length > 0 ? (
                 books.map((book) => (
-                    <li key={book.isbn13}>
+                    <li key={book.id || book.isbn13}>
                         <BookListItem
-                            book={{
-                                ...book,
-                                title: book.title || "Untitled",
-                                author: book.author || "Unknown",
-                                price: book.price || 0,
-                            }}
+                            book={book}
                             onAddedToCart={() => onAddedToCart(book)}
                         />
                     </li>
-
                 ))
             ) : (
                 <ErrorIndicator />
@@ -34,21 +27,6 @@ const BookList = ({ books, onAddedToCart }) => {
         </ul>
     );
 };
-
-BookList.propTypes = {
-    books: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-            author: PropTypes.string.isRequired,
-            isbn13: PropTypes.string.isRequired,
-            price: PropTypes.string,
-            image: PropTypes.string,
-        })
-    ).isRequired,
-    onAddedToCart: PropTypes.func.isRequired,
-};
-
 
 const BookListContainer = () => {
     const dispatch = useDispatch();
@@ -67,19 +45,14 @@ const BookListContainer = () => {
             <Spinner />
             <Pagination />
         </>
-    )
+    );
 
     return (
-        <div>
-            {books.length > 0 ? (
-                <>
-                    <BookList books={books} onAddedToCart={handleAddToCart} />
-                    <Pagination />
-                </>
-            ) : (
-                <ErrorIndicator />
-            )}
-        </div>
+        <>
+            <BookList books={books} onAddedToCart={handleAddToCart} />
+            <Pagination />
+            <BookModal />
+        </>
     );
 };
 

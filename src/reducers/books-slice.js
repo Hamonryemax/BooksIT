@@ -8,7 +8,8 @@ const initialState = {
     orderTotal: 0,
     currentPage: 1,
     totalBooks: 0,
-    currentQuery: 'javaScript'
+    currentQuery: 'javaScript',
+    selectedBook: null
 };
 
 const booksSlice = createSlice({
@@ -82,7 +83,13 @@ const booksSlice = createSlice({
         },
         setCurrentQuery(state, action) {
             state.currentQuery = action.payload;
-        }
+        },
+        closeBookModal(state) {
+            state.selectedBook = null;
+        },
+        setSelectedBook: (state, action) => {
+            state.selectedBook = action.payload;
+        },
     },
 });
 
@@ -95,7 +102,9 @@ export const {
     fetchBooksSuccess,
     fetchBooksFailure,
     setCurrentPage,
-    setCurrentQuery
+    setCurrentQuery,
+    closeBookModal,
+    setSelectedBook
 } = booksSlice.actions;
 
 export default booksSlice.reducer;
